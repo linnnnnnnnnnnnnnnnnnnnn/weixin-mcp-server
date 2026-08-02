@@ -7,9 +7,18 @@ WeChat MCP Server for Hermes
 import asyncio
 import json
 import os
+import sys
 import logging
 from pathlib import Path
 from typing import Any
+
+# 将仓库根目录加入 sys.path 前缀，使下方对 pyweixin 的 import 不再依赖
+# MCP 客户端拉起子进程时是否传递了 cwd（实测部分客户端会忽略 cwd 字段，
+# 导致从自身目录启动 `python -m src.server` 时找不到 pyweixin 而崩溃）。
+# pyweixin 以 vendored 形式置于仓库根，仓库根进入 sys.path 即可被解析。
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
 from fastmcp import FastMCP
 from pyweixin.WeChatTools import Navigator, Tools
@@ -294,5 +303,10 @@ def wechat_open_dialog(friend: str) -> dict:
         return {"success": False, "summary": f"打开聊天窗口失败: {str(e)}"}
 
 
-if __name__ == "__main__":
+def main():
+    """MCP 服务入口，供 `python -m src.server` 与 pyproject scripts 调用。"""
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()

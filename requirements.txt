@@ -1,0 +1,16 @@
+# weixin-mcp-server 运行时依赖
+# 注意：pyweixin 已以 vendored 形式内置在仓库根 pyweixin/ 目录，无需 pip install。
+fastmcp>=2.0.0
+pywinauto>=0.6.8
+pywin32>=308
+psutil>=5.9.5
+pyautogui>=0.9.54
+pillow>=10.4.0
+beautifulsoup4>=4.12.0
+emoji>=2.8.0
+markdownify>=0.13.1
+packaging>=23.0
+comtypes>=1.4.0
+pycaw>=20240128
+sounddevice>=0.4.6
+soundfile>=0.12.1
