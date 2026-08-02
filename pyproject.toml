@@ -1,0 +1,23 @@
+[project]
+name = "weixin-mcp-server"
+version = "1.0.0"
+description = "WeChat MCP Server for Hermes, based on pyweixin, compatible with WeChat 4.1+"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=2.0.0",
+    "pywinauto>=0.6.8",
+    "pywin32>=308",
+    "psutil>=5.9.5",
+    "pyautogui>=0.9.54",
+    "pillow>=10.4.0",
+]
+
+[project.scripts]
+weixin-mcp = "src.server:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "."}
